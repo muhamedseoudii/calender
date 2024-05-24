@@ -1,4 +1,6 @@
+import 'package:calender/component/buttom_custom.dart';
 import 'package:calender/screens/add_screen/add_task_view.dart';
+import 'package:calender/screens/add_screen/personal_task_view.dart';
 import 'package:calender/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,7 +78,17 @@ class AddView extends StatelessWidget {
                           "add first task".tr,
                           style: AppTextStyles.largeTitle25,
                         ),
-                      )
+                      ),
+                      SizedBox(height: 25.h),
+                      FilledButtomEdit(
+                        text: "go to personal tasks".tr,
+                        buttonColor: const Color(0xff1565C0),
+                        size: 16,
+                        textColor: Colors.white,
+                        onClick: () {
+                          Get.to(() => const PersonalTaskView());
+                        },
+                      ),
                     ],
                   ),
                 )

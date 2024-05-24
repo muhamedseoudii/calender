@@ -106,6 +106,12 @@ class MyLocale implements Translations {
           "create your new password": "قم بإنشاء كلمة المرور الجديدة الخاصة بك",
           "confirm password": "تأكيد كلمة المرور",
           "press": "أضغط",
+          "successful": "ناجح",
+          "your task has been added successfully": "تمت إضافة مهمتك بنجاح",
+          "go to personal tasks": "انتقل إلى المهام الشخصية",
+          "select notification time": "حدد وقت الأشعارات",
+          "personal task": "مهمة شخصية",
+          "no tasks added.": "لم تتم إضافة أي مهام.",
         },
         "en": {
           "login": "Login",
@@ -156,7 +162,7 @@ class MyLocale implements Translations {
           "add first task": "Add first task",
           "no new notification yet": "No new notification yet",
           "dark mode": "Dark mode",
-          "change pass": "change password",
+          "change pass": "Change password",
           "title": "Problem title",
           "please enter your problem title": "Please enter your problem title",
           "description": "Problem description",
@@ -204,6 +210,13 @@ class MyLocale implements Translations {
           "create your new password": "Create your new password",
           "confirm password": "Confirm password",
           "press": "Press",
+          "successful": "Successful",
+          "your task has been added successfully":
+              "Your task has been added successfully",
+          "go to personal tasks": "Go to personal tasks",
+          "select notification time": "Select notification time",
+          "personal task": "Personal task",
+          "no tasks added.": "No tasks added.",
         },
       };
 }

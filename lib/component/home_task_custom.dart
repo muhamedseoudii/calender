@@ -47,6 +47,8 @@ class HomeTaskCustom extends StatelessWidget {
             ),
             subtitle: Text(
               desc,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 14,
@@ -55,6 +57,8 @@ class HomeTaskCustom extends StatelessWidget {
             ),
             trailing: Text(
               date,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,

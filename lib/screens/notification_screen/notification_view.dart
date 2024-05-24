@@ -30,16 +30,31 @@ class NotificationView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 5.h),
-                      Text(
-                        "notification".tr,
-                        style: AppTextStyles.largeTitleWhite25,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "notification".tr,
+                            style: AppTextStyles.largeTitleWhite25,
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                LocalNotificationService()
+                                    .cancelAllNotification();
+                              },
+                              child: Text(
+                                "Cancel Notification".tr,
+                                style: AppTextStyles.largeTitleWhite16,
+                              ))
+                        ],
                       ),
                       SizedBox(height: 200.h),
                       InkWell(
                         onTap: () {
-                          NotificationService().showNotification(
-                              title: "New notification",
-                              body: "Check new tasks");
+                          LocalNotificationService().showNotification(
+                            title: "New schedule notification",
+                            body: "Check new tasks",
+                          );
                         },
                         child: Center(
                           child: Container(

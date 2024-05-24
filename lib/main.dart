@@ -1,17 +1,33 @@
+import 'package:calender/utils/notification_services.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'features/controllers/theme_service_controller.dart';
+import 'features/models/task_hive_model.dart';
 import 'src/app_root.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 SharedPreferences? pref;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotificationService.initNotification();
+  tz.initializeTimeZones();
   await initSharedPreferences().then((prefs) {
     pref = prefs;
     Get.put(() => ThemeController().loadThemeFromPreferences());
   });
+  // Hive Setup
+  final appDocumentDirectory =
+      await path_provider.getApplicationDocumentsDirectory();
+  await Hive.initFlutter(appDocumentDirectory.path);
+
+  Hive.registerAdapter(TaskModelAdapter());
+  await Hive.openBox<TaskModel>('tasks');
+
   runApp(const AppRoot());
 }
 

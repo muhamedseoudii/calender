@@ -13,6 +13,8 @@ class TextFieldCustomEdit extends StatelessWidget {
   final int? maxLines;
   final Color? fillColor;
   final TextStyle? style;
+  final void Function()? onTap;
+  final bool readOnly;
 
   const TextFieldCustomEdit(
       {super.key,
@@ -25,11 +27,15 @@ class TextFieldCustomEdit extends StatelessWidget {
       this.maxLines,
       this.labelText,
       this.fillColor,
-      this.style});
+      this.style,
+      this.onTap,
+      this.readOnly = false});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: onTap,
+      readOnly: readOnly,
       controller: controller,
       keyboardType: textInputType,
       maxLines: maxLines,
