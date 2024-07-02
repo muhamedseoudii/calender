@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:calender/features/models/task_hive_model.dart';
 import 'package:calender/utils/app_text_styles.dart';
+import 'package:calender/utils/notification_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ class PersonalTaskView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: const Color(0xff1565C0),
           title: Text(
             'personal task'.tr,
@@ -46,16 +48,21 @@ class PersonalTaskView extends StatelessWidget {
                         return Dismissible(
                           key: Key(task?.key.toString() ?? ''),
                           direction: DismissDirection.endToStart,
-                          onDismissed: (direction) {
-                            taskBox.deleteAt(index);
-                            Get.snackbar(
-                              'successful'.tr,
-                              "you deleted your task".tr,
-                              duration: const Duration(seconds: 2),
-                              snackPosition: SnackPosition.TOP,
-                              backgroundColor: Colors.red,
-                              colorText: Colors.white,
-                            );
+                          onDismissed: (direction) async {
+                            final taskKey = task?.key.toInt();
+                            if (taskKey != null) {
+                              await LocalNotificationService()
+                                  .cancelNotification(taskKey);
+                              taskBox.deleteAt(index);
+                              Get.snackbar(
+                                'successful'.tr,
+                                "you deleted your task".tr,
+                                duration: const Duration(seconds: 2),
+                                snackPosition: SnackPosition.TOP,
+                                backgroundColor: Colors.red,
+                                colorText: Colors.white,
+                              );
+                            }
                           },
                           background: Container(
                             alignment: Alignment.centerRight,

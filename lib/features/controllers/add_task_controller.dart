@@ -17,6 +17,7 @@ class AddTaskController extends GetxController {
   TextEditingController clockController = TextEditingController();
 
   DropListModel dropListNotification = DropListModel([
+    OptionItem(id: "0", title: "None".tr),
     OptionItem(id: "1", title: "1 hour before".tr),
     OptionItem(id: "2", title: "2 hours before".tr),
     OptionItem(id: "3", title: "3 hours before".tr),
@@ -65,11 +66,38 @@ class AddTaskController extends GetxController {
     final DateTime combinedDateTime = DateTime(taskDate.year, taskDate.month,
         taskDate.day, taskTime.hour, taskTime.minute);
 
-    final tz.TZDateTime scheduledDateTime =
-        tz.TZDateTime.from(combinedDateTime, tz.local);
+    // final tz.TZDateTime scheduledDateTime =
+    //     tz.TZDateTime.from(combinedDateTime, tz.local);
 
     final int notificationId =
         task.hashCode; // Use task's hashCode as unique id
+
+    // Calculate notification time based on user selection
+    Duration notificationOffset = Duration.zero;
+    switch (optionItemSelectedNotification.value.id) {
+      case "1":
+        notificationOffset = const Duration(hours: 1);
+        break;
+      case "2":
+        notificationOffset = const Duration(hours: 2);
+        break;
+      case "3":
+        notificationOffset = const Duration(hours: 3);
+        break;
+      case "4":
+        notificationOffset = const Duration(minutes: 10);
+        break;
+      case "5":
+        notificationOffset = const Duration(minutes: 15);
+        break;
+      case "0":
+      default:
+        notificationOffset = Duration.zero; // No delay
+        break;
+    }
+
+    final tz.TZDateTime scheduledDateTime = tz.TZDateTime.from(
+        combinedDateTime.subtract(notificationOffset), tz.local);
 
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(

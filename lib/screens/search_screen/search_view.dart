@@ -18,7 +18,7 @@ class SearchView extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: 120.h,
+                  height: 130.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(

@@ -14,6 +14,7 @@ class ReportView extends StatelessWidget {
     Get.put(ReportController());
     return Scaffold(
       appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: const Color(0xff1565C0),
           title: Text(
             "report".tr,

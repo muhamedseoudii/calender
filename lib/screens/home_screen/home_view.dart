@@ -35,7 +35,7 @@ class HomeView extends StatelessWidget {
                     "home".tr,
                     style: AppTextStyles.largeTitleWhite25,
                   ),
-                  SizedBox(height: 90.h),
+                  SizedBox(height: 65.h),
                   Expanded(
                     child: ListView.separated(
                         itemBuilder: (context, index) {

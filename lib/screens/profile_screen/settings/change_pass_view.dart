@@ -18,6 +18,7 @@ class ChangePassView extends StatelessWidget {
     Get.put(ChangePassController());
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color(0xff1565C0),
         title: Text(
           "change password".tr,

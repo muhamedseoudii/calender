@@ -10,6 +10,7 @@ class PolicyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: const Color(0xff1565C0),
           title: Text(
             "policy".tr,

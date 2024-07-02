@@ -1,4 +1,6 @@
+import 'package:calender/features/controllers/notification_controller.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -21,7 +23,25 @@ class LocalNotificationService {
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
     await notificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: (details) {},
+      onDidReceiveNotificationResponse: (details) {
+        var payload = details.payload;
+        var title = "No title";
+        var description = "No description";
+
+        if (payload != null) {
+          var payloadParts = payload.split('|');
+          if (payloadParts.length == 2) {
+            title = payloadParts[0];
+            description = payloadParts[1];
+          }
+        }
+
+        Get.find<NotificationsController>().addNotification(
+          title,
+          description,
+          DateTime.now(),
+        );
+      },
     );
   }
 
@@ -59,17 +79,19 @@ class LocalNotificationService {
     await notificationsPlugin.zonedSchedule(
         id, title, body, scheduledDate, notificationDetails,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        payload: "$title|$body",
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time);
   }
 
-  void cancelNotification(int id) async {
+  Future<void> cancelNotification(int id) async {
     await notificationsPlugin.cancel(id);
   }
 
   void cancelAllNotification() async {
     await notificationsPlugin.cancelAll();
+    Get.find<NotificationsController>().clearNotifications();
   }
 }
 // class NotifyHelper {

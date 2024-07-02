@@ -13,6 +13,7 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LoginController loginController = Get.put(LoginController());
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       body: SingleChildScrollView(
@@ -48,7 +49,7 @@ class LoginView extends StatelessWidget {
                                 topRight: Radius.circular(16.r),
                                 topLeft: Radius.circular(16.r)),
                             color: Colors.white),
-                        height: 300.h,
+                        height: 330.h,
                         width: 300.w,
                         child: Padding(
                           padding: EdgeInsets.all(16.w),
@@ -110,6 +111,49 @@ class LoginView extends StatelessWidget {
                                         ),
                                       ],
                                     ),
+                                    SizedBox(
+                                      height: 50.h,
+                                    ),
+                                    // Obx(
+                                    //   () => controller.isLoading.value
+                                    //       ? const Center(
+                                    //           child: CircularProgressIndicator(
+                                    //               color: Color(0xff79A3D3)),
+                                    //         )
+                                    //       : InkWell(
+                                    //           onTap: () {
+                                    //             if (formKey.currentState!
+                                    //                 .validate()) {
+                                    //               // controller.login();
+                                    //               Get.offAll(() =>
+                                    //                   const BottomNavBar());
+                                    //             }
+                                    //           },
+                                    //           child: Center(
+                                    //             child: Container(
+                                    //               height: 60.h,
+                                    //               width: 300.w,
+                                    //               decoration: BoxDecoration(
+                                    //                   borderRadius:
+                                    //                       BorderRadius.only(
+                                    //                           bottomLeft: Radius
+                                    //                               .circular(
+                                    //                                   16.r),
+                                    //                           bottomRight: Radius
+                                    //                               .circular(
+                                    //                                   16.r)),
+                                    //                   color: const Color(
+                                    //                       0xff01579B)),
+                                    //               child: Center(
+                                    //                   child: Text(
+                                    //                 "signin".tr,
+                                    //                 style: AppTextStyles
+                                    //                     .largeTitleWhite20,
+                                    //               )),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    // ),
                                   ],
                                 ),
                               );
@@ -143,7 +187,6 @@ class LoginView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 70.h),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.center,
                   //   children: [
